@@ -10,11 +10,11 @@ import Layout from "../components/layout/Layout";
 //   color: red;
 // `;
 
-const Home = () => {
+const Nosotros = () => {
   return (
     <div>
       <Layout>
-        <h1>Inicio</h1>
+        <h1>Nosotros</h1>
 
         {/* 
         CSS en Next.js
@@ -31,4 +31,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Nosotros;
