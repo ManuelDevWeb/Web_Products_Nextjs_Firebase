@@ -10,7 +10,7 @@ import Boton from "../ui/Boton";
 
 // Styled components
 const ContenedorHeader = styled.div`
-  max-width: 1200px;
+  max-width: 1280px;
   width: 95%;
   margin: 0 auto;
 
@@ -31,18 +31,24 @@ const Logo = styled.p`
 `;
 
 const Header = () => {
-  const usuario = true;
+  const usuario = false;
 
   return (
-    // Aplicando styles props
     <header
+      // Aplicando styles props
       css={css`
         border-bottom: 2px solid var(--gris3);
         padding: 1rem 0;
       `}
     >
       <ContenedorHeader>
-        <div>
+        <div
+          // Aplicando styles props
+          css={css`
+            display: flex;
+            align-items: center;
+          `}
+        >
           <Link href="/">
             <Logo>P</Logo>
           </Link>
@@ -78,11 +84,11 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Link href="/">
+                <Link href="/login">
                   <Boton bgColor="true">Login</Boton>
                 </Link>
 
-                <Link href="/">
+                <Link href="/crear-cuenta">
                   <Boton g>Crear Cuenta</Boton>
                 </Link>
               </>
