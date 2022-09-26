@@ -6,6 +6,7 @@ import { css } from "@emotion/react";
 // Components
 import Buscar from "../ui/Buscar";
 import Navegacion from "./Navegacion";
+import Boton from "../ui/Boton";
 
 // Styled components
 const ContenedorHeader = styled.div`
@@ -22,7 +23,7 @@ const ContenedorHeader = styled.div`
 
 const Logo = styled.p`
   color: var(--verde);
-  font-size: 4rem;
+  font-size: 3rem;
   line-height: 0;
   font-weight: 700;
   font-family: "Roboto Slab", serif;
@@ -30,6 +31,8 @@ const Logo = styled.p`
 `;
 
 const Header = () => {
+  const usuario = true;
+
   return (
     // Aplicando styles props
     <header
@@ -51,14 +54,40 @@ const Header = () => {
           <Navegacion />
         </div>
 
-        <div>
-          {/* Menu de administracion */}
-          <p>Hola: Manuel</p>
+        <div
+          // Aplicando styles props
+          css={css`
+            display: flex;
+            align-items: center;
+          `}
+        >
+          {
+            /* Menu de administracion */
+            usuario ? (
+              <>
+                <p
+                  // Aplicando styles props
+                  css={css`
+                    margin-right: 2rem;
+                  `}
+                >
+                  Hola: Manuel
+                </p>
 
-          <button type="button">Cerrar Sesion</button>
+                <Boton bgColor="true">Cerrar Sesion</Boton>
+              </>
+            ) : (
+              <>
+                <Link href="/">
+                  <Boton bgColor="true">Login</Boton>
+                </Link>
 
-          <Link href="/">Login</Link>
-          <Link href="/">Crear Cuenta</Link>
+                <Link href="/">
+                  <Boton g>Crear Cuenta</Boton>
+                </Link>
+              </>
+            )
+          }
         </div>
       </ContenedorHeader>
     </header>

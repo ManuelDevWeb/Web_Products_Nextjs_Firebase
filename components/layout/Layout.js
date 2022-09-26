@@ -15,7 +15,7 @@ const Layout = (props) => {
             --gris: #3d3d3d;
             --gris2: #6f6f6f;
             --gris3: #e1e1e1;
-            --verde: #26e2bf;
+            --verde: #27c8a7;
           }
 
           html: {
@@ -30,7 +30,7 @@ const Layout = (props) => {
           }
 
           body {
-            font-size: 1.4rem; /* 14 px, gracias a la linea del font-size: 62.5% */
+            font-size: 1.2rem; /* 14 px, gracias a la linea del font-size: 62.5% */
             line-height: 1.5;
             font-family: "PT Sans", sans-serif;
           }
