@@ -17,8 +17,8 @@ const ButtonSubmit = styled.button`
   background-image: url("/static/img/buscar.png");
   background-repeat: no-repeat;
   position: absolute;
-  right: 1px;
-  top: 1px;
+  right: 2px;
+  top: 2px;
   background-color: white;
   border: none;
   text-indent: -9999px;
