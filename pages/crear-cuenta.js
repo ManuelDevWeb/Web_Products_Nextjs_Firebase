@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { css } from "@emotion/react";
+import Router from "next/router";
 
 // Components
 import Layout from "../components/layout/Layout";
@@ -15,6 +16,9 @@ import useValidacion from "../hooks/useValidacion";
 // Funcion para validar datos
 import validarCrearCuenta from "../validacion/validarCrearCuenta";
 
+// Importando app de firebase inicializada con las funciones
+import { firebase } from "../firebase";
+
 // State inicial
 const STATE_INICIAL = {
   nombre: "",
@@ -23,10 +27,8 @@ const STATE_INICIAL = {
 };
 
 const CrearCuenta = () => {
-  // Funcion crear cuenta
-  const crearCuenta = () => {
-    console.log("Creando cuenta...");
-  };
+  // State para manejar el error
+  const [error, setError] = useState(false);
 
   // Llamando y destructurando el custom hook
   const {
@@ -39,6 +41,19 @@ const CrearCuenta = () => {
   } = useValidacion(STATE_INICIAL, validarCrearCuenta, crearCuenta);
 
   const { nombre, email, password } = valores;
+
+  // Funcion crear cuenta
+  async function crearCuenta() {
+    try {
+      // Llamando la funcion encargada de registrar usuarios
+      await firebase.registrarUsuario(nombre, email, password);
+      // Redireccionando usuario a la pagina inicial
+      Router.push("/");
+    } catch (error) {
+      console.log("Hubo un error al crear el usuario", error.message);
+      setError(error.message);
+    }
+  }
 
   return (
     <div>
@@ -107,6 +122,11 @@ const CrearCuenta = () => {
             {
               // Validando si hay errores
               errores.password && <Error>{errores.password}</Error>
+            }
+
+            {
+              // Validando si hay error al crear usuario
+              error && <Error>{error}</Error>
             }
 
             <InputSubmit type="submit" value="Crear Cuenta" />

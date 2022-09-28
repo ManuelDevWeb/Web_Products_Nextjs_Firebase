@@ -89,7 +89,7 @@ const Header = () => {
                 </Link>
 
                 <Link href="/crear-cuenta">
-                  <Boton g>Crear Cuenta</Boton>
+                  <Boton>Crear Cuenta</Boton>
                 </Link>
               </>
             )
