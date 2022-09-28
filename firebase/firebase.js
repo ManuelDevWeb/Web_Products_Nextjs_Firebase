@@ -3,6 +3,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 // Configuracion firebase
@@ -33,6 +34,12 @@ class Firebase {
     return await updateProfile(nuevoUsuario.user, {
       displayName: nombre,
     });
+  }
+
+  // Funcion para iniciar sesion
+  async loginUsuario(email, password) {
+    // Iniciando sesion en firebase
+    return await signInWithEmailAndPassword(this.auth, email, password);
   }
 }
 

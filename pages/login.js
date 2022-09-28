@@ -16,6 +16,9 @@ import useValidacion from "../hooks/useValidacion";
 // Funcion para validar datos
 import validarIniciarSesion from "../validacion/validarIniciarSesion";
 
+// Importando app de firebase inicializada con las funciones
+import { firebase } from "../firebase";
+
 // State inicial
 const STATE_INICIAL = {
   email: "",
@@ -39,8 +42,15 @@ const Login = () => {
   const { email, password } = valores;
 
   // Funcion iniciar sesion
-  function iniciarSesion() {
-    console.log("Iniciando Sesion");
+  async function iniciarSesion() {
+    try {
+      // Llamando la funcion encargada de logear usuarios
+      await firebase.loginUsuario(email, password);
+      // Redireccionando usuario a la pagina inicial
+      Router.push("/");
+    } catch (error) {
+      setError(error.message);
+    }
   }
 
   return (
