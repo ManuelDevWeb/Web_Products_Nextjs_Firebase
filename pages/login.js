@@ -10,12 +10,10 @@ import {
   InputSubmit,
   Error,
 } from "../components/ui/Formulario";
-
 // Custom Hooks
 import useValidacion from "../hooks/useValidacion";
 // Funcion para validar datos
 import validarIniciarSesion from "../validacion/validarIniciarSesion";
-
 // Importando app de firebase inicializada con las funciones
 import { firebase } from "../firebase";
 
@@ -45,7 +43,8 @@ const Login = () => {
   async function iniciarSesion() {
     try {
       // Llamando la funcion encargada de logear usuarios
-      await firebase.loginUsuario(email, password);
+      const usuario = await firebase.loginUsuario(email, password);
+      // console.log(usuario);
       // Redireccionando usuario a la pagina inicial
       Router.push("/");
     } catch (error) {

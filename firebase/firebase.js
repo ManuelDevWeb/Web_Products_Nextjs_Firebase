@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 // Configuracion firebase
@@ -40,6 +41,12 @@ class Firebase {
   async loginUsuario(email, password) {
     // Iniciando sesion en firebase
     return await signInWithEmailAndPassword(this.auth, email, password);
+  }
+
+  // Funcion para cerrar sesion
+  async logoutUsuario() {
+    // Cerrar sesion en firebase
+    await signOut(this.auth);
   }
 }
 

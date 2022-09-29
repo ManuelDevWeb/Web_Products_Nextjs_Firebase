@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
@@ -7,6 +7,8 @@ import { css } from "@emotion/react";
 import Buscar from "../ui/Buscar";
 import Navegacion from "./Navegacion";
 import Boton from "../ui/Boton";
+// Importando contexto firebase
+import { FirebaseContext } from "../../firebase";
 
 // Styled components
 const ContenedorHeader = styled.div`
@@ -31,7 +33,8 @@ const Logo = styled.p`
 `;
 
 const Header = () => {
-  const usuario = false;
+  // Accediendo al contexto y a los valore
+  const { usuarioAutenticado, firebase } = useContext(FirebaseContext);
 
   return (
     <header
@@ -69,7 +72,7 @@ const Header = () => {
         >
           {
             /* Menu de administracion */
-            usuario ? (
+            usuarioAutenticado ? (
               <>
                 <p
                   // Aplicando styles props
@@ -77,10 +80,16 @@ const Header = () => {
                     margin-right: 2rem;
                   `}
                 >
-                  Hola: Manuel
+                  Hola: {usuarioAutenticado.displayName}
                 </p>
 
-                <Boton bgColor="true">Cerrar Sesion</Boton>
+                <Boton
+                  bgColor="true"
+                  // Cerramos cesion al hacer click
+                  onClick={() => firebase.logoutUsuario()}
+                >
+                  Cerrar Sesion
+                </Boton>
               </>
             ) : (
               <>

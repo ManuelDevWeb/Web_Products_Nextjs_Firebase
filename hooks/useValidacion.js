@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const useValidacion = (stateInicial, validar, functSubmit) => {
   // Valores que el usuario ingresa en los inputs del formulario
@@ -8,7 +8,7 @@ const useValidacion = (stateInicial, validar, functSubmit) => {
   // Cuando el usuario hace submit pasa a true
   const [submitForm, setSubmitForm] = useState(false);
 
-  // useEffect que se ejecuta una vez
+  // useEffect que se ejecuta cada que cambie el valor de errores
   useEffect(() => {
     // Validando si submitForm es true
     if (submitForm) {

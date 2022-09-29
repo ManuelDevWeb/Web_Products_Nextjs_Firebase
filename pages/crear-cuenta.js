@@ -50,7 +50,7 @@ const CrearCuenta = () => {
       // Redireccionando usuario a la pagina inicial
       Router.push("/");
     } catch (error) {
-      console.log("Hubo un error al crear el usuario", error.message);
+      // console.log("Hubo un error al crear el usuario", error.message);
       setError(error.message);
     }
   }

@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
+
+// Importando contexto firebase
+import { FirebaseContext } from "../../firebase";
 
 // Styled components
 const Nav = styled.nav`
@@ -19,11 +22,17 @@ const Nav = styled.nav`
 `;
 
 const Navegacion = () => {
+  // Accediendo al contexto y a los valore
+  const { usuarioAutenticado } = useContext(FirebaseContext);
+
   return (
     <Nav>
       <Link href="/">Inicio</Link>
       <Link href="/populares">Populares</Link>
-      <Link href="/nuevo-producto">Nuevo Producto</Link>
+      {
+        // Validando si hay un usuario logeado
+        usuarioAutenticado && <Link href="/nuevo-producto">Nuevo Producto</Link>
+      }
     </Nav>
   );
 };
