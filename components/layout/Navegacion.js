@@ -16,7 +16,7 @@ const Nav = styled.nav`
     font-family: "PT Sans", sans-serif;
 
     &:last-of-type {
-      margin-right: 0;
+      margin-right: 0px;
     }
   }
 `;
