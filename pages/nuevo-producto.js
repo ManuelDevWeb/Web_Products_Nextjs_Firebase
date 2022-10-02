@@ -18,7 +18,7 @@ import useValidacion from "../hooks/useValidacion";
 // Funcion para validar datos
 import validarCrearProducto from "../validacion/validarCrearProducto";
 
-// Importando Context Firease
+// Importando Context Firebase
 import { FirebaseContext } from "../firebase";
 
 // State inicial
@@ -30,7 +30,7 @@ const STATE_INICIAL = {
 };
 
 const NuevoProducto = () => {
-  // Accediendo al contexto y a los valore
+  // Accediendo al contexto y a los valores
   const { usuarioAutenticado, firebase } = useContext(FirebaseContext);
 
   // State imagen
