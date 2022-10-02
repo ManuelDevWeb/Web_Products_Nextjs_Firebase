@@ -7,6 +7,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 // Configuracion firebase
 import firebaseConfig from "./config";
@@ -24,6 +25,8 @@ class Firebase {
     this.auth = getAuth();
     // Base de Datos
     this.db = getFirestore(myApp);
+    // Storage (Files)
+    this.storage = getStorage(myApp);
   }
 
   // Funcion para registrar un usuario

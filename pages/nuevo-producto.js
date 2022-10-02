@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { css } from "@emotion/react";
 import Router from "next/router";
 import { addDoc, collection } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Components
 import Layout from "../components/layout/Layout";
@@ -24,7 +25,6 @@ import { FirebaseContext } from "../firebase";
 const STATE_INICIAL = {
   nombre: "",
   empresa: "",
-  imagen: "",
   url: "",
   descripcion: "",
 };
@@ -33,11 +33,20 @@ const NuevoProducto = () => {
   // Accediendo al contexto y a los valore
   const { usuarioAutenticado, firebase } = useContext(FirebaseContext);
 
-  // Llamando y destructurando el custom hook
-  const { valores, errores, handleSubmit, handleChange, handleBlur } =
-    useValidacion(STATE_INICIAL, validarCrearProducto, crearProducto);
+  // State imagen
+  const [image, setImage] = useState(null);
 
-  const { nombre, empresa, imagen, url, descripcion } = valores;
+  // Llamando y destructurando el custom hook
+  const {
+    valores,
+    errores,
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    submitForm,
+  } = useValidacion(STATE_INICIAL, validarCrearProducto, crearProducto);
+
+  const { nombre, empresa, url, descripcion } = valores;
 
   // Funcion crear producto
   async function crearProducto() {
@@ -51,6 +60,7 @@ const NuevoProducto = () => {
       nombre,
       empresa,
       url,
+      imageUrl: await handleUpload(),
       descripcion,
       votos: 0,
       comentarios: [],
@@ -61,6 +71,35 @@ const NuevoProducto = () => {
     try {
       // Agregando documento (producto) a la coleccion de productos
       await addDoc(collection(firebase.db, "productos"), producto);
+      // console.log("Producto agregado", producto);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // Funcion para actualizar el estado de imagen
+  const handleFile = (e) => {
+    if (e.target.files[0]) {
+      // console.log(e.target.files[0]);
+      setImage(e.target.files[0]);
+    }
+  };
+
+  // Funcion para subir la imagen a firestore
+  async function handleUpload() {
+    if (image === null) return;
+
+    // Creando la referencia de la imagen
+    const imagenRef = ref(
+      firebase.storage,
+      `imagenes/productos/${image.name + image.lastModified}`
+    );
+
+    try {
+      // Subiendo imagen a firebase
+      const fileUploaded = await uploadBytes(imagenRef, image);
+      // Obtener url http de la imagen
+      return getDownloadURL(fileUploaded.ref);
     } catch (error) {
       console.log(error);
     }
@@ -119,17 +158,16 @@ const NuevoProducto = () => {
               errores.empresa && <Error>{errores.empresa}</Error>
             }
 
-            {/* <Campo>
-              <label htmlFor="imagen">Imagen</label>
+            <Campo>
+              <label htmlFor="image">Imagen</label>
               <input
                 type="file"
-                id="imagen"
-                name="imagen"
-                value={imagen}
-                onChange={handleChange}
-                onBlur={handleBlur}
+                accept="image/*"
+                id="image"
+                name="image"
+                onInput={(e) => handleFile(e)}
               />
-            </Campo> */}
+            </Campo>
 
             <Campo>
               <label htmlFor="url">URL</label>
