@@ -58,80 +58,78 @@ const CrearCuenta = () => {
   return (
     <div>
       <Layout>
-        <>
-          <h1
-            // Aplicando styles props
-            css={css`
-              text-align: center;
-              margin-top: 3rem;
-            `}
-          >
-            Crear Cuenta
-          </h1>
-          <Formulario
-            // Ejecutando la funcion que viene desde el custom hook y se ejecuta al enviar formulario
-            onSubmit={handleSubmit}
-            noValidate
-          >
-            <Campo>
-              <label htmlFor="nombre">Nombre</label>
-              <input
-                type="text"
-                id="nombre"
-                placeholder="Tu Nombre"
-                name="nombre"
-                value={nombre}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Campo>
-            {
-              // Validando si hay errores
-              errores.nombre && <Error>{errores.nombre}</Error>
-            }
+        <h1
+          // Aplicando styles props
+          css={css`
+            text-align: center;
+            margin-top: 3rem;
+          `}
+        >
+          Crear Cuenta
+        </h1>
+        <Formulario
+          // Ejecutando la funcion que viene desde el custom hook y se ejecuta al enviar formulario
+          onSubmit={handleSubmit}
+          noValidate
+        >
+          <Campo>
+            <label htmlFor="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              placeholder="Tu Nombre"
+              name="nombre"
+              value={nombre}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Campo>
+          {
+            // Validando si hay errores
+            errores.nombre && <Error>{errores.nombre}</Error>
+          }
 
-            <Campo>
-              <label htmlFor="email">Email</label>
-              <input
-                type="text"
-                id="email"
-                placeholder="Tu Email"
-                name="email"
-                value={email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Campo>
-            {
-              // Validando si hay errores
-              errores.email && <Error>{errores.email}</Error>
-            }
+          <Campo>
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              placeholder="Tu Email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Campo>
+          {
+            // Validando si hay errores
+            errores.email && <Error>{errores.email}</Error>
+          }
 
-            <Campo>
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Tu Password"
-                name="password"
-                value={password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Campo>
-            {
-              // Validando si hay errores
-              errores.password && <Error>{errores.password}</Error>
-            }
+          <Campo>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Tu Password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Campo>
+          {
+            // Validando si hay errores
+            errores.password && <Error>{errores.password}</Error>
+          }
 
-            {
-              // Validando si hay error al crear usuario
-              error && <Error>{error}</Error>
-            }
+          {
+            // Validando si hay error al crear usuario
+            error && <Error>{error}</Error>
+          }
 
-            <InputSubmit type="submit" value="Crear Cuenta" />
-          </Formulario>
-        </>
+          <InputSubmit type="submit" value="Crear Cuenta" />
+        </Formulario>
       </Layout>
     </div>
   );
