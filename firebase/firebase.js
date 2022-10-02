@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 // Configuracion firebase
 import firebaseConfig from "./config";
@@ -13,13 +14,16 @@ import firebaseConfig from "./config";
 // Clase Firebase con todos los metodos necesarios
 class Firebase {
   constructor() {
+    let myApp;
     // Validamos si no hay ninguna aplicacion inicializada
     if (!app.apps.length) {
       // Cada que se instancie Firebase, se inicia la app
-      app.initializeApp(firebaseConfig);
+      myApp = app.initializeApp(firebaseConfig);
     }
     // Metodos de autenticacion de firebase
     this.auth = getAuth();
+    // Base de Datos
+    this.db = getFirestore(myApp);
   }
 
   // Funcion para registrar un usuario

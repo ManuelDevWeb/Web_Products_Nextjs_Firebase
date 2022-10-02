@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { css } from "@emotion/react";
 import Router from "next/router";
+import { addDoc, collection } from "firebase/firestore";
 
 // Components
 import Layout from "../components/layout/Layout";
@@ -16,6 +17,9 @@ import useValidacion from "../hooks/useValidacion";
 // Funcion para validar datos
 import validarCrearProducto from "../validacion/validarCrearProducto";
 
+// Importando Context Firease
+import { FirebaseContext } from "../firebase";
+
 // State inicial
 const STATE_INICIAL = {
   nombre: "",
@@ -26,6 +30,9 @@ const STATE_INICIAL = {
 };
 
 const NuevoProducto = () => {
+  // Accediendo al contexto y a los valore
+  const { usuarioAutenticado, firebase } = useContext(FirebaseContext);
+
   // Llamando y destructurando el custom hook
   const { valores, errores, handleSubmit, handleChange, handleBlur } =
     useValidacion(STATE_INICIAL, validarCrearProducto, crearProducto);
@@ -33,8 +40,30 @@ const NuevoProducto = () => {
   const { nombre, empresa, imagen, url, descripcion } = valores;
 
   // Funcion crear producto
-  function crearProducto() {
-    console.log("Creando producto!");
+  async function crearProducto() {
+    // Validamos si el usuario esta logeado
+    if (!usuarioAutenticado) {
+      return Router.push("/login");
+    }
+
+    // Crear el objeto de nuevo producto
+    const producto = {
+      nombre,
+      empresa,
+      url,
+      descripcion,
+      votos: 0,
+      comentarios: [],
+      creado: Date.now(),
+    };
+
+    // Insertando en la DB
+    try {
+      // Agregando documento (producto) a la coleccion de productos
+      await addDoc(collection(firebase.db, "productos"), producto);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
