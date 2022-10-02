@@ -16,13 +16,12 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "babel-plugin-emotion": "^11.0.0",
+    "date-fns": "^2.29.3",
     "firebase": "^9.10.0",
     "firebase-admin": "^11.0.1",
     "next": "12.3.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-firebase-file-uploader": "^2.4.4",
-    "y": "^0.3.2"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "eslint": "8.23.1",
