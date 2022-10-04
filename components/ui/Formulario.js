@@ -39,7 +39,7 @@ const Campo = styled.div`
 
 const InputSubmit = styled.input`
   background-color: var(--verde);
-  width: 100%;
+  width: 96%;
   padding: 1rem;
   text-align: center;
   color: #fff;
