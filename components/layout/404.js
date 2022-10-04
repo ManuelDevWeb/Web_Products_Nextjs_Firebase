@@ -10,7 +10,7 @@ const Error404 = () => {
         text-align: center;
       `}
     >
-      Producto no encontrado!
+      No se puede mostrar!
     </h1>
   );
 };

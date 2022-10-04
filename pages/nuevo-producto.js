@@ -12,6 +12,7 @@ import {
   InputSubmit,
   Error,
 } from "../components/ui/Formulario";
+import Error404 from "../components/layout/404";
 
 // Custom Hooks
 import useValidacion from "../hooks/useValidacion";
@@ -65,6 +66,11 @@ const NuevoProducto = () => {
       votos: 0,
       comentarios: [],
       creado: Date.now(),
+      creador: {
+        id: usuarioAutenticado.uid,
+        nombre: usuarioAutenticado.displayName,
+      },
+      votantes: [],
     };
 
     // Insertando en la DB
@@ -108,106 +114,112 @@ const NuevoProducto = () => {
   return (
     <div>
       <Layout>
-        <h1
-          // Aplicando styles props
-          css={css`
-            text-align: center;
-            margin-top: 3rem;
-          `}
-        >
-          Nuevo Producto
-        </h1>
-        <Formulario
-          // Ejecutando la funcion que viene desde el custom hook y se ejecuta al enviar formulario
-          onSubmit={handleSubmit}
-          noValidate
-        >
-          <fieldset>
-            <legend>Informacion General</legend>
-            <Campo>
-              <label htmlFor="nombre">Nombre</label>
-              <input
-                type="text"
-                id="nombre"
-                placeholder="Nombre Producto"
-                name="nombre"
-                value={nombre}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Campo>
-            {
-              // Validando si hay errores
-              errores.nombre && <Error>{errores.nombre}</Error>
-            }
+        {!usuarioAutenticado ? (
+          <Error404 />
+        ) : (
+          <>
+            <h1
+              // Aplicando styles props
+              css={css`
+                text-align: center;
+                margin-top: 3rem;
+              `}
+            >
+              Nuevo Producto
+            </h1>
+            <Formulario
+              // Ejecutando la funcion que viene desde el custom hook y se ejecuta al enviar formulario
+              onSubmit={handleSubmit}
+              noValidate
+            >
+              <fieldset>
+                <legend>Informacion General</legend>
+                <Campo>
+                  <label htmlFor="nombre">Nombre</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    placeholder="Nombre Producto"
+                    name="nombre"
+                    value={nombre}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </Campo>
+                {
+                  // Validando si hay errores
+                  errores.nombre && <Error>{errores.nombre}</Error>
+                }
 
-            <Campo>
-              <label htmlFor="empresa">Empresa</label>
-              <input
-                type="text"
-                id="empresa"
-                placeholder="Nombre Empresa"
-                name="empresa"
-                value={empresa}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Campo>
-            {
-              // Validando si hay errores
-              errores.empresa && <Error>{errores.empresa}</Error>
-            }
+                <Campo>
+                  <label htmlFor="empresa">Empresa</label>
+                  <input
+                    type="text"
+                    id="empresa"
+                    placeholder="Nombre Empresa"
+                    name="empresa"
+                    value={empresa}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </Campo>
+                {
+                  // Validando si hay errores
+                  errores.empresa && <Error>{errores.empresa}</Error>
+                }
 
-            <Campo>
-              <label htmlFor="image">Imagen</label>
-              <input
-                type="file"
-                accept="image/*"
-                id="image"
-                name="image"
-                onInput={(e) => handleFile(e)}
-              />
-            </Campo>
+                <Campo>
+                  <label htmlFor="image">Imagen</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="image"
+                    name="image"
+                    onInput={(e) => handleFile(e)}
+                  />
+                </Campo>
 
-            <Campo>
-              <label htmlFor="url">URL</label>
-              <input
-                type="url"
-                id="url"
-                name="url"
-                placeholder="URL del Producto"
-                value={url}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Campo>
-            {
-              // Validando si hay errores
-              errores.url && <Error>{errores.url}</Error>
-            }
-          </fieldset>
+                <Campo>
+                  <label htmlFor="url">URL</label>
+                  <input
+                    type="url"
+                    id="url"
+                    name="url"
+                    placeholder="URL del Producto"
+                    value={url}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </Campo>
+                {
+                  // Validando si hay errores
+                  errores.url && <Error>{errores.url}</Error>
+                }
+              </fieldset>
 
-          <fieldset>
-            <legend>Sobre tu Producto</legend>
+              <fieldset>
+                <legend>Sobre tu Producto</legend>
 
-            <Campo>
-              <label htmlFor="descripcion">Descripcion</label>
-              <textarea
-                id="descripcion"
-                name="descripcion"
-                value={descripcion}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Campo>
-            {
-              // Validando si hay errores
-              errores.descripcion && <Error>{errores.descripcion}</Error>
-            }
-          </fieldset>
+                <Campo>
+                  <label htmlFor="descripcion">Descripcion</label>
+                  <textarea
+                    id="descripcion"
+                    name="descripcion"
+                    value={descripcion}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </Campo>
+                {
+                  // Validando si hay errores
+                  errores.descripcion && <Error>{errores.descripcion}</Error>
+                }
+              </fieldset>
 
-          <InputSubmit type="submit" value="Crear Producto" />
-        </Formulario>
+              <InputSubmit type="submit" value="Crear Producto" />
+            </Formulario>
+          </>
+        )}
       </Layout>
     </div>
   );
