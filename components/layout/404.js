@@ -6,7 +6,7 @@ const Error404 = () => {
     // Styled props
     <h1
       css={css`
-        margin-top: 5rem;
+        margin-top: 1rem;
         text-align: center;
       `}
     >
