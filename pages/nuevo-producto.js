@@ -76,7 +76,7 @@ const NuevoProducto = () => {
     // Insertando en la DB
     try {
       // Agregando documento (producto) a la coleccion de productos
-      await addDoc(collection(firebase.db, "productos"), producto);
+      await addDoc(collection(firebase.db, "movies"), producto);
       // console.log("Producto agregado", producto);
     } catch (error) {
       console.log(error);

@@ -23,7 +23,7 @@ const ContenedorHeader = styled.div`
   }
 `;
 
-const Logo = styled.p`
+const Logo = styled.a`
   color: var(--verde);
   font-size: 3rem;
   line-height: 0;

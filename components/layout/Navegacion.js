@@ -27,11 +27,19 @@ const Navegacion = () => {
 
   return (
     <Nav>
-      <Link href="/">Inicio</Link>
-      <Link href="/populares">Populares</Link>
+      <Link href="/">
+        <a>Inicio</a>
+      </Link>
+      <Link href="/populares">
+        <a>Populares</a>
+      </Link>
       {
         // Validando si hay un usuario logeado
-        usuarioAutenticado && <Link href="/nuevo-producto">Nuevo Producto</Link>
+        usuarioAutenticado && (
+          <Link href="/nuevo-producto">
+            <a> Nuevo Producto</a>
+          </Link>
+        )
       }
     </Nav>
   );

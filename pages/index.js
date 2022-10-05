@@ -24,7 +24,7 @@ const Home = () => {
   useEffect(() => {
     const obtenerProductos = async () => {
       // Describiendo lo que nos queremos traer de la DB
-      const querySnapshot = await getDocs(collection(firebase.db, "productos"));
+      const querySnapshot = await getDocs(collection(firebase.db, "movies"));
       // Obteniendo los datos a partir de la query
       const productos = querySnapshot.docs.map((doc) => {
         return {

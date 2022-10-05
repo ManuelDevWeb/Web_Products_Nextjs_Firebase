@@ -1,12 +1,12 @@
 // Config Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyAFbuIfabPipmxkDeNZysy59bC8JEv8YX4",
-  authDomain: "web-products-19fc9.firebaseapp.com",
-  projectId: "web-products-19fc9",
-  storageBucket: "web-products-19fc9.appspot.com",
-  messagingSenderId: "1047922607544",
-  appId: "1:1047922607544:web:12e52bc68125b974f8fb4d",
-  measurementId: "G-24982N963M",
+  apiKey: "AIzaSyBMwdF5IwvhSP8KTq8ecX4EjQ3nLKPfKgg",
+  authDomain: "web-movies-8d97a.firebaseapp.com",
+  projectId: "web-movies-8d97a",
+  storageBucket: "web-movies-8d97a.appspot.com",
+  messagingSenderId: "800655594174",
+  appId: "1:800655594174:web:92c4bbd599da94a84984ef",
+  measurementId: "G-H0B0Y8KME1",
 };
 
 export default firebaseConfig;
