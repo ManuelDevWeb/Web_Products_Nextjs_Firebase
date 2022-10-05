@@ -24,11 +24,23 @@ const ContenedorProducto = styled.div`
   }
 `;
 
+const CreadorProducto = styled.p`
+  padding: 0.5rem 2rem;
+  background-color: #0c7c65;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+`;
+
 const Producto = () => {
   // State del producto
   const [producto, setProducto] = useState({});
   // State del error
   const [error, setError] = useState(false);
+  // State de comentario
+  const [comentario, setComentario] = useState({});
 
   // Llamando useRouter para tener acceso a la informacion de la URL
   const router = useRouter();
@@ -95,7 +107,7 @@ const Producto = () => {
     // Guardar el id del usuario que vota en el arreglo de votantes
     const nuevoVotantes = [...votantes, usuarioAutenticado.uid];
 
-    // Actualizar en la DB de firebbase
+    // Actualizar en la DB de firebase
     // Describiendo lo que queremos traer de la DB
     const productoQuery = doc(firebase.db, "productos", id);
     // Modificamos el documento obtenido y pasamos la data
@@ -109,6 +121,52 @@ const Producto = () => {
       ...producto,
       votos: nuevoTotal,
     });
+  };
+
+  // Funcion para crear comentario
+  const comentarioChange = (e) => {
+    setComentario({
+      ...comentario,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Funcion para agregar comentarios al producto
+  const agregarComentario = async (e) => {
+    e.preventDefault();
+
+    // Validamos si el usuario esta autenticado
+    if (!usuarioAutenticado) {
+      return router.push("/login");
+    }
+
+    // Informacion extra al comentario
+    comentario.usuarioId = usuarioAutenticado.uid;
+    comentario.usuarioNombre = usuarioAutenticado.displayName;
+
+    // Tomar copia de comentarios y agregarlos al arreglo
+    const nuevosComentarios = [...comentarios, comentario];
+
+    // Actualizar en la DB de firebase
+    // Describiendo lo que queremos traer de la DB
+    const productoQuery = doc(firebase.db, "productos", id);
+    // Modificamos el documento obtenido y pasamos la data
+    await updateDoc(productoQuery, {
+      comentarios: nuevosComentarios,
+    });
+
+    // Actualizar el state
+    setProducto({
+      ...producto,
+      comentarios: nuevosComentarios,
+    });
+  };
+
+  // Funcion que identifica si el comentario es del creador del producto
+  const esCreador = (id) => {
+    if (creador.id === id) {
+      return true;
+    }
   };
 
   return (
@@ -147,9 +205,16 @@ const Producto = () => {
                 usuarioAutenticado && (
                   <>
                     <h2>Agrega tu comentario</h2>
-                    <form>
+                    <form
+                      // Funcion que se ejecuta al enviar formulario
+                      onSubmit={agregarComentario}
+                    >
                       <Campo>
-                        <input type="text" name="mensaje" />
+                        <input
+                          type="text"
+                          name="mensaje"
+                          onChange={comentarioChange}
+                        />
                       </Campo>
                       <InputSubmit type="submit" value="Agregar comentario" />
                     </form>
@@ -164,15 +229,41 @@ const Producto = () => {
               >
                 Comentarios
               </h2>
-              {
-                // Iterando sobre los comentarios
-                comentarios.map((comentario) => (
-                  <li>
-                    <p>{comentario.nombre}</p>
-                    <p>Escrito por: {comentario.usuarioNombre}</p>
-                  </li>
-                ))
-              }
+
+              {comentarios.length === 0 ? (
+                "Aun no hay comentarios"
+              ) : (
+                <ul>
+                  {
+                    // Iterando sobre los comentarios
+                    comentarios.map((comentario, i) => (
+                      <li
+                        key={`${comentario.usuarioId}-${i}`}
+                        css={css`
+                          border: 1px solid #e1e1e1;
+                          padding: 2rem;
+                        `}
+                      >
+                        <p>{comentario.mensaje}</p>
+                        <p>
+                          Escrito por:
+                          <span
+                            css={css`
+                              font-weight: bold;
+                            `}
+                          >
+                            {" "}
+                            {comentario.usuarioNombre}
+                          </span>
+                        </p>
+                        {esCreador(comentario.usuarioId) && (
+                          <CreadorProducto>Es Creador</CreadorProducto>
+                        )}
+                      </li>
+                    ))
+                  }
+                </ul>
+              )}
             </div>
 
             <aside>
