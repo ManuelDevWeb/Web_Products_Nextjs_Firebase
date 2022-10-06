@@ -78,7 +78,7 @@ const Producto = () => {
       };
       obtenerProducto();
     }
-  }, [id, producto]);
+  }, [id, consultarDB]);
 
   if (Object.keys(producto).length === 0 && !error) return "Cargando...";
 

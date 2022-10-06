@@ -37,7 +37,7 @@ const Navegacion = () => {
         // Validando si hay un usuario logeado
         usuarioAutenticado && (
           <Link href="/nuevo-producto">
-            <a> Nuevo Producto</a>
+            <a>Nuevo Producto</a>
           </Link>
         )
       }

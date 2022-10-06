@@ -70,7 +70,7 @@ const Layout = (props) => {
 
       {/* Head HTML, aca van fuentes, meta etc */}
       <Head>
-        <html lang="es" />
+        {/* <html lang="es" /> */}
         <title>We Products Firebase y Next.js</title>
         {/* Normalize para quitar estilos del navegador*/}
         <link
