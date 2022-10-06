@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useRouter } from "next/router";
-import { getDoc, doc, updateDoc } from "firebase/firestore";
+import { getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
@@ -179,6 +179,38 @@ const Producto = () => {
     }
   };
 
+  // Funcion que revisa que el creados del producto sea el que esta logeado
+  const puedeBorrar = () => {
+    // Validando si hay usuario logeado
+    if (!usuarioAutenticado) return false;
+
+    if (creador.id === usuarioAutenticado.uid) {
+      return true;
+    }
+  };
+
+  // Funcion para eliminar producto de la DB
+  const eliminarProducto = async () => {
+    if (!usuarioAutenticado) {
+      return router.push("/login");
+    }
+
+    if (creador.id !== usuarioAutenticado.uid) {
+      return router.push("/");
+    }
+
+    try {
+      // Describiendo lo que queremos traer de la DB
+      const productoQuery = doc(firebase.db, "movies", id);
+      // Eliminando de Firebase
+      await deleteDoc(productoQuery);
+
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Layout>
       <>
@@ -304,6 +336,10 @@ const Producto = () => {
                 </div>
               </aside>
             </ContenedorProducto>
+
+            {puedeBorrar() && (
+              <Boton onClick={eliminarProducto}>Eliminar Producto</Boton>
+            )}
           </div>
         )}
       </>

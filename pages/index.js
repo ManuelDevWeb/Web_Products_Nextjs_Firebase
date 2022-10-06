@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import { getDocs, collection } from "firebase/firestore";
 
 // Components
 import Layout from "../components/layout/Layout";
 import DetallesProducto from "../components/layout/DetallesProducto";
 
-// Importando Context Firebase
-import { FirebaseContext } from "../firebase";
+// Custom hook
+import useProductos from "../hooks/useProductos";
 
 // Styled components
 // const Heading = styled.h1`
@@ -14,29 +13,7 @@ import { FirebaseContext } from "../firebase";
 // `;
 
 const Home = () => {
-  // Accediendo al contexto y a los valores
-  const { firebase } = useContext(FirebaseContext);
-
-  // State de productos
-  const [productos, setProductos] = useState([]);
-
-  // UseEffect que se ejecuta una vez se renderiza el componente
-  useEffect(() => {
-    const obtenerProductos = async () => {
-      // Describiendo lo que nos queremos traer de la DB
-      const querySnapshot = await getDocs(collection(firebase.db, "movies"));
-      // Obteniendo los datos a partir de la query
-      const productos = querySnapshot.docs.map((doc) => {
-        return {
-          id: doc.id,
-          ...doc.data(),
-        };
-      });
-      // Almacenando los datos en el state
-      setProductos(productos);
-    };
-    obtenerProductos();
-  }, []);
+  const { productos } = useProductos("creado");
 
   return (
     <div>
