@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
@@ -29,14 +29,30 @@ const ButtonSubmit = styled.button`
 `;
 
 const Buscar = () => {
+  // State que maneja la busqueda del usuario
+  const [busqueda, setBusqueda] = useState("");
+
+  // Funcion para uscar producto
+  const buscarProducto = (e) => {
+    e.preventDefault();
+
+    console.log("Buscando", busqueda);
+  };
+
   return (
     <form
       // Aplicando styles props
       css={css`
         position: relative;
       `}
+      // Funcion que se ejecuta al enviar formulario
+      onSubmit={buscarProducto}
     >
-      <InputText type="text" placeholder="Buscar Productos" />
+      <InputText
+        type="text"
+        placeholder="Buscar Productos"
+        onChange={(e) => setBusqueda(e.target.value)}
+      />
       <ButtonSubmit type="submit">Buscar</ButtonSubmit>
     </form>
   );
