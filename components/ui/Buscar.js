@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import Router from "next/router";
 
 // Styles components
 const InputText = styled.input`
@@ -37,17 +36,7 @@ const Buscar = () => {
   const buscarProducto = (e) => {
     e.preventDefault();
 
-    // Validamos que el usuario haya ingresado un valor
-    if (busqueda.trim() === "") return;
-
-    // Redireccionando al usuario a /buscar
-    Router.push({
-      pathname: "/buscar",
-      // Creando query en la ruta (?key=valorBusqueda), la leemos en el componente busqueda
-      query: {
-        q: busqueda,
-      },
-    });
+    console.log("Buscando", busqueda);
   };
 
   return (
