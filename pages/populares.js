@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
-import { getDocs, collection, orderBy, query } from "firebase/firestore";
+import React from "react";
 
 // Components
 import Layout from "../components/layout/Layout";

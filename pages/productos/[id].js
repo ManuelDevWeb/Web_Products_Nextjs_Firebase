@@ -13,7 +13,7 @@ import { Campo, InputSubmit } from "../../components/ui/Formulario";
 import Boton from "../../components/ui/Boton";
 
 // Importando Context Firebase
-import { FirebaseContext } from "../../firebase";
+import FirebaseContext from "../../firebase/context";
 
 // Styled components
 const ContenedorProducto = styled.div`

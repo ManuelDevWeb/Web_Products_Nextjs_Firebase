@@ -1,7 +1,6 @@
-import App from "next/app";
-
 // Importando app de firebase inicializada y el contexto
-import { firebase, FirebaseContext } from "../firebase";
+import FirebaseContext from "../firebase/context";
+import firebase from "../firebase/firebase";
 // Custom Hooks
 import useAutenticacion from "../hooks/useAutenticacion";
 

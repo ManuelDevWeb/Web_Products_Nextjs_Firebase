@@ -4,13 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "export": "next export"
   },
   "dependencies": {
-    "@babel/core": "^7.19.1",
     "@emotion/babel-plugin": "^11.10.2",
     "@emotion/babel-preset-css-prop": "^11.10.0",
     "@emotion/core": "^11.0.0",
@@ -25,6 +23,8 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.3",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.1"
   }

@@ -8,7 +8,7 @@ import Buscar from "../ui/Buscar";
 import Navegacion from "./Navegacion";
 import Boton from "../ui/Boton";
 // Importando contexto firebase
-import { FirebaseContext } from "../../firebase";
+import FirebaseContext from "../../firebase/context";
 
 // Styled components
 const ContenedorHeader = styled.div`

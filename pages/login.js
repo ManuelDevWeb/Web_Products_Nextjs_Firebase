@@ -15,7 +15,7 @@ import useValidacion from "../hooks/useValidacion";
 // Funcion para validar datos
 import validarIniciarSesion from "../validacion/validarIniciarSesion";
 // Importando app de firebase inicializada con las funciones
-import { firebase } from "../firebase";
+import firebase from "../firebase/firebase";
 
 // State inicial
 const STATE_INICIAL = {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { getDocs, collection, query, orderBy } from "firebase/firestore";
 
 // Importando Contexto Firebase
-import { FirebaseContext } from "../firebase";
+import FirebaseContext from "../firebase/context";
 
 const useProductos = (orden) => {
   // Accediendo al contexto y a los valores

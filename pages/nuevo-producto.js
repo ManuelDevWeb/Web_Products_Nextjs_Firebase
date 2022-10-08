@@ -20,7 +20,7 @@ import useValidacion from "../hooks/useValidacion";
 import validarCrearProducto from "../validacion/validarCrearProducto";
 
 // Importando Context Firebase
-import { FirebaseContext } from "../firebase";
+import FirebaseContext from "../firebase/context";
 
 // State inicial
 const STATE_INICIAL = {

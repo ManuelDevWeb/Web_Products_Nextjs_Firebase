@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 
 // Importando contexto firebase
-import { FirebaseContext } from "../../firebase";
+import FirebaseContext from "../../firebase/context";
 
 // Styled components
 const Nav = styled.nav`
